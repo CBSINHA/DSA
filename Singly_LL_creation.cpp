@@ -24,9 +24,7 @@ void print(Node *head){
     cout<<"NULL";
 }
 int main(){    //main function
-    Node* head;//declating head
-    head->data=1;//initializing head's data
-    head->next=NULL;//initializing head's next;
+    Node* head=new Node(170);//declating head
     Node* temp=head;//another pointer variable temp of type Node to store head's value
     temp=insertNodeAtend(temp,2);//inserting at end
     temp=insertNodeAtend(temp,3);
