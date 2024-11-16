@@ -10,7 +10,7 @@ class Node{//class declaration
         this->next=NULL;//constructor's initialized next value
     }
 };
-Node* insertNodeAtend(Node* temp,int data){//function to insert node at end woth O(1)
+Node* insertNodeAtend(Node* temp,int data){//function to insert node at end with O(1)
     Node* node=new Node(data);
     //dynamic memory allocation of Node(with data) and variable node pointer of type Node stores data
     temp->next=node;//linking previous node's next pointer to the newly created node
@@ -24,7 +24,7 @@ void print(Node *head){
     cout<<"NULL";
 }
 int main(){    //main function
-    Node* head=new Node(170);//declating head
+    Node* head=new Node(170);//declaring head
     Node* temp=head;//another pointer variable temp of type Node to store head's value
     temp=insertNodeAtend(temp,2);//inserting at end
     temp=insertNodeAtend(temp,3);
