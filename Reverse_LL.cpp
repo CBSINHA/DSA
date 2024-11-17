@@ -30,7 +30,7 @@ void display(Node* head){
     cout<<"NULL"<<endl;
 }
 
-Node* create(Node* temp,int val){//adds Nodes to end
+Node* create(Node* temp,int val){//adds Nodes to end[O(1)]
     Node* node=new Node(val);
     if(temp==NULL){
         return node;
