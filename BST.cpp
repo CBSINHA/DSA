@@ -92,7 +92,12 @@ void PreOrderTraversal(Node* root){
     PreOrderTraversal(root->left);
     PreOrderTraversal(root->right);
 }
-
+void PostOrderTraversal(Node* root){
+    if(root==NULL)return;
+    PostOrderTraversal(root->left);
+    PostOrderTraversal(root->right);
+    cout<<root->data<<" ";
+}
 int main(){
     Node* root=NULL;
     root=createTree(root,10);
@@ -117,5 +122,7 @@ int main(){
     InorderTraversal(root);
     cout<<"\nPreorder Traversal: ";
     PreOrderTraversal(root);
+    cout<<"\nPostOrder Traversal: ";
+    PostOrderTraversal(root);
     return 0;
 }
