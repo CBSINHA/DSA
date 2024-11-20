@@ -1,4 +1,5 @@
 #include<iostream>
+#include<queue>
 using namespace std;
 class Node{
     public:
@@ -57,17 +58,26 @@ void findMax(Node* root){
         cout<<"The maximum value in Bst= "<<root->data<<endl;
     }
 }
-void heightOfnode(Node* root,int value){
-
-}
-void depthOfnode(Node* root,int value){
-
-}
 int heightTree(Node* root){
     if(root==NULL)
     return -1;
     else{
         return max(heightTree(root->left)+1,heightTree(root->right)+1);
+    }
+}
+void LevelOrderTraversal(Node* root){
+    if(root==NULL)
+    return;
+    queue<Node*>q;
+    q.push(root);
+    while(!q.empty()){
+        Node* current=q.front();
+        cout<<current->data<<" ";
+        if(current->left)
+        q.push(current->left);
+        if(current->right)
+        q.push(current->right);
+        q.pop();
     }
 }
 int main(){
@@ -88,5 +98,7 @@ int main(){
     findMin(root);
     findMax(root);
     cout<<"Height of tree: "<<heightTree(root)<<endl;
+    cout<<"Level Order traversal: "<<endl;
+    LevelOrderTraversal(root);
     return 0;
 }
