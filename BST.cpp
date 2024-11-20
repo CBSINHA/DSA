@@ -57,6 +57,19 @@ void findMax(Node* root){
         cout<<"The maximum value in Bst= "<<root->data<<endl;
     }
 }
+void heightOfnode(Node* root,int value){
+
+}
+void depthOfnode(Node* root,int value){
+
+}
+int heightTree(Node* root){
+    if(root==NULL)
+    return -1;
+    else{
+        return max(heightTree(root->left)+1,heightTree(root->right)+1);
+    }
+}
 int main(){
     Node* root=NULL;
     root=createTree(root,10);
@@ -66,6 +79,7 @@ int main(){
     root=createTree(root,12);
     root=createTree(root,11);
     root=createTree(root,13);
+    root=createTree(root,9);
     if(Search(root,12)){
         cout<<"Element found"<<endl;
     }
@@ -73,5 +87,6 @@ int main(){
     cout<<"Not found"<<endl;
     findMin(root);
     findMax(root);
+    cout<<"Height of tree: "<<heightTree(root)<<endl;
     return 0;
 }
