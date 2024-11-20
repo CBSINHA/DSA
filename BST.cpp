@@ -86,6 +86,12 @@ void InorderTraversal(Node* root){
     cout<<root->data<<" ";
     InorderTraversal(root->right);
 }
+void PreOrderTraversal(Node* root){
+    if(root==NULL) return;
+    cout<<root->data<<" ";
+    PreOrderTraversal(root->left);
+    PreOrderTraversal(root->right);
+}
 
 int main(){
     Node* root=NULL;
@@ -109,6 +115,7 @@ int main(){
     LevelOrderTraversal(root);
     cout<<"\nInOrder Traversal: ";
     InorderTraversal(root);
-
+    cout<<"\nPreorder Traversal: ";
+    PreOrderTraversal(root);
     return 0;
 }
