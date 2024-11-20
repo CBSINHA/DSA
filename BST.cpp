@@ -80,6 +80,13 @@ void LevelOrderTraversal(Node* root){
         q.pop();
     }
 }
+void InorderTraversal(Node* root){
+    if(root==NULL) return;
+    InorderTraversal(root->left);
+    cout<<root->data<<" ";
+    InorderTraversal(root->right);
+}
+
 int main(){
     Node* root=NULL;
     root=createTree(root,10);
@@ -98,7 +105,10 @@ int main(){
     findMin(root);
     findMax(root);
     cout<<"Height of tree: "<<heightTree(root)<<endl;
-    cout<<"Level Order traversal: "<<endl;
+    cout<<"Level Order traversal: ";
     LevelOrderTraversal(root);
+    cout<<"\nInOrder Traversal: ";
+    InorderTraversal(root);
+
     return 0;
 }
