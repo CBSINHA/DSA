@@ -1,5 +1,6 @@
 #include<iostream>
 #include<queue>
+#include<limits.h>
 using namespace std;
 class Node{
     public:
@@ -98,6 +99,11 @@ void PostOrderTraversal(Node* root){
     PostOrderTraversal(root->right);
     cout<<root->data<<" ";
 }
+bool IsBST(Node* root,long min,long max){
+    if(root==NULL)return true;
+    if(root->data<max&&root->data>min&&IsBST(root->left,min,root->data)&&IsBST(root->right,root->data,max)) return true;
+    else return false;
+}
 int main(){
     Node* root=NULL;
     root=createTree(root,10);
@@ -124,5 +130,7 @@ int main(){
     PreOrderTraversal(root);
     cout<<"\nPostOrder Traversal: ";
     PostOrderTraversal(root);
+    cout<<"\nIs This a binary tree?:";
+    cout<<IsBST(root,LONG_MIN,LONG_MAX);
     return 0;
 }
