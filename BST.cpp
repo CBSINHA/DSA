@@ -131,6 +131,31 @@ Node* Delete(Node* root,int value){
     }
     return root;
 }
+Node* Find(Node* root,int value){
+    if(root==NULL)return root;
+    if(value<root->data) return Find(root->left,value);
+    else if(value>root->data) return Find(root->right,value);
+    else return root;
+}
+Node* InorderPredecessor(Node* root,int value){
+    if(root==NULL) return root;
+    Node* current=Find(root,value);
+    if(current->left!=NULL){
+        return findMax(current-> left);
+    }
+    else{
+        Node* ancestor=root;
+        Node* predecessor=NULL;
+        while(ancestor!=current){
+            if(current->data>ancestor->data){
+                predecessor=ancestor;
+                ancestor=ancestor->right;
+            }
+            else ancestor=ancestor->left;
+        }
+        return predecessor;
+    }
+}
 int main(){
     Node* root=NULL;
     root=createTree(root,10);
@@ -161,8 +186,11 @@ int main(){
     PostOrderTraversal(root);
     cout<<"\nIs This a binary tree?:";
     cout<<IsBST(root,LONG_MIN,LONG_MAX);
-    root=Delete(root,10);
+    //root=Delete(root,10);
     cout<<"\nAfter deletion: ";
     InorderTraversal(root);
+    cout<<"\nInorder predecessor: ";
+    Node* predecessor=InorderPredecessor(root,10);
+    cout<<predecessor->data<<endl;
     return 0;
 }
