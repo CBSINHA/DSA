@@ -30,33 +30,30 @@ bool Search(Node* root,int value){
     else if(root->data==value)
     return true;
     else if(value<root->data){
-        Search(root->left,value);
+        return Search(root->left,value);
     }
     else
-    Search(root->right,value);
+    return Search(root->right,value);
 }
-void findMin(Node* root){
+Node* findMin(Node* root){
     if(root==NULL){
-        cout<<"Empty BST"<<endl;    
+        return NULL;    
     }
-    // else if(root->left==NULL){
-    //     cout<<"Least value: "<<root->data<<endl;
-    // }
     else{
     while(root->left!=NULL){
         root=root->left;
     }
-    cout<<"Least value in BST= "<<root->data<<endl;
+    return root;
     }
 }
-void findMax(Node* root){
+Node* findMax(Node* root){
     if(root==NULL)
     cout<<"Empty BST"<<endl;
     else{
         while(root->right!=NULL){
             root=root->right;
         }
-        cout<<"The maximum value in Bst= "<<root->data<<endl;
+        return root;
     }
 }
 int heightTree(Node* root){
@@ -104,6 +101,36 @@ bool IsBST(Node* root,long min,long max){
     if(root->data<max&&root->data>min&&IsBST(root->left,min,root->data)&&IsBST(root->right,root->data,max)) return true;
     else return false;
 }
+Node* Delete(Node* root,int value){
+    if(root==NULL) return root;
+    else if(value<root->data){
+        root->left=Delete(root->left,value);
+    }
+    else if(value>root->data) root->right=Delete(root->right,value);
+    else{
+        //case 1 no child
+        if(root->left==NULL&&root->right==NULL){
+            delete root;
+            root=NULL;
+        }
+        else if(root->left==NULL){//root has only right child
+            Node* temp=root;
+            root=root->right;
+            delete temp;
+        }
+        else if(root->right==NULL){//root has only left child
+            Node* temp=root;
+            root=root->left;
+            delete temp;
+        }
+        else{//root has both left and right child
+            Node* temp=findMin(root->right);
+            root->data=temp->data;
+            root->right=Delete(root->right,temp->data);
+        }
+    }
+    return root;
+}
 int main(){
     Node* root=NULL;
     root=createTree(root,10);
@@ -119,8 +146,10 @@ int main(){
     }
     else
     cout<<"Not found"<<endl;
-    findMin(root);
-    findMax(root);
+    Node* min=findMin(root);
+    cout<<"Min value: "<<min->data<<endl;
+    Node* max=findMax(root);
+    cout<<"Max Value: "<<max->data<<endl;
     cout<<"Height of tree: "<<heightTree(root)<<endl;
     cout<<"Level Order traversal: ";
     LevelOrderTraversal(root);
@@ -132,5 +161,8 @@ int main(){
     PostOrderTraversal(root);
     cout<<"\nIs This a binary tree?:";
     cout<<IsBST(root,LONG_MIN,LONG_MAX);
+    root=Delete(root,10);
+    cout<<"\nAfter deletion: ";
+    InorderTraversal(root);
     return 0;
 }
