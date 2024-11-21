@@ -140,6 +140,7 @@ Node* Find(Node* root,int value){
 Node* InorderPredecessor(Node* root,int value){
     if(root==NULL) return root;
     Node* current=Find(root,value);
+    if(current==NULL) return NULL;
     if(current->left!=NULL){
         return findMax(current-> left);
     }
@@ -154,6 +155,26 @@ Node* InorderPredecessor(Node* root,int value){
             else ancestor=ancestor->left;
         }
         return predecessor;
+    }
+}
+Node* InorderSuccessor(Node* root,int value){
+    if(root==NULL)return root;
+    Node* current=Find(root,value);
+    if(current==NULL)return NULL;
+    if(current->right!=NULL){
+        return findMin(current->right);
+    }
+    else{
+        Node* successor=NULL;
+        Node* ancestor=root;
+        while(ancestor!=current){
+            if(current->data<ancestor->data){
+                successor=ancestor;
+                ancestor=ancestor->left;
+            }
+            else ancestor=ancestor->right;
+        }
+        return successor;
     }
 }
 int main(){
@@ -192,5 +213,8 @@ int main(){
     cout<<"\nInorder predecessor: ";
     Node* predecessor=InorderPredecessor(root,10);
     cout<<predecessor->data<<endl;
+    cout<<"Inorder successor: ";
+    Node* successor=InorderSuccessor(root,9);
+    cout<<successor->data<<endl;
     return 0;
 }
