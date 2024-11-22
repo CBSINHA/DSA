@@ -177,6 +177,11 @@ Node* InorderSuccessor(Node* root,int value){
         return successor;
     }
 }
+int heightNode(Node* root,int value){
+    Node* current=Find(root,value);
+    if(current==NULL)return -1;
+    heightTree(current);
+}
 int main(){
     Node* root=NULL;
     root=createTree(root,10);
@@ -216,5 +221,7 @@ int main(){
     cout<<"Inorder successor: ";
     Node* successor=InorderSuccessor(root,9);
     cout<<successor->data<<endl;
+    cout<<"Height of node:";
+    cout<<heightNode(root,7);
     return 0;
 }
