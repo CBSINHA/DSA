@@ -98,7 +98,8 @@ void PostOrderTraversal(Node* root){
 }
 bool IsBST(Node* root,long min,long max){
     if(root==NULL)return true;
-    if(root->data<max&&root->data>min&&IsBST(root->left,min,root->data)&&IsBST(root->right,root->data,max)) return true;
+    if(root->data<max&&root->data>min&&IsBST(root->left,min,root->data)&&
+        IsBST(root->right,root->data,max)) return true;
     else return false;
 }
 Node* Delete(Node* root,int value){
