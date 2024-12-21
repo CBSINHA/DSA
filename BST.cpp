@@ -193,7 +193,7 @@ int main(){
     root=createTree(root,11);
     root=createTree(root,13);
     root=createTree(root,9);
-    if(Search(root,12)){
+    if(Search(root,-12)){
         cout<<"Element found"<<endl;
     }
     else
